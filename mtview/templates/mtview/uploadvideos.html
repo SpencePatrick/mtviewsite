@@ -1,0 +1,17 @@
+{% extends "mtview/base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class = "jumbotron">
+  <h3> Upload Video Form </h3>
+  <div class = "well">
+    <form action='/uploadvideos/' method='post'>
+      {% csrf_token %}
+      {{ form }}
+      <input type="submit" value="Submit" />
+    </form>
+  </div>
+</div>
+
+{% endblock %}

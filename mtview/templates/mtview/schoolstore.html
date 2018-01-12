@@ -1,0 +1,52 @@
+{% extends "mtview/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="jumbotron">
+  <h1>MVHS Mavs Wrestling School Store</h1>
+</div>
+    {% if merchandise %}
+      <div class = "col-md-9">
+        {% for product in merchandise %}
+        <div class = "panel-body">
+          <div class="col-md-6">
+            <span>
+              <h2> {{ product.product }} </h2>
+              <img class = "thumbnail" width = "320px" href="#" src = "{% static "" %}images/{{ product.picture}} "></img>
+              <h3>${{ product.price }}</h3>
+            </span>
+          </div>
+          <div class="col-md-3">
+
+            </br>
+            <form action='/schoolstore/' method='post'>
+              {% csrf_token %}
+              {{ form.as_p }}
+              <input type="submit" value="Add To Cart" />
+            </form>
+
+
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <div class = "col-md-3">
+        <div class = "well">
+          <h4>Shopping Cart</h4>
+          {% if cartitems %}
+            <span><p>{{ cartitems.quantity }} {{ cartitems.size }} {{ cartitems.color }}</p></span>
+
+          {% else %}
+            <h5>Cart is Empty</h5>
+          {% endif %}
+        </div>
+      </div>
+    {% else %}
+      <h3 style="font-color: grey;">Merchandise coming soon!</h3>
+    {% endif %}
+  </div>
+</div>
+
+
+
+{% endblock %}

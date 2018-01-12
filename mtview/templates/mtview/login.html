@@ -1,0 +1,12 @@
+{% extends "mtview/base.html" %}
+{% load static %}
+
+{% block content %}
+  </br></br></br>
+  <h2>You must be logged in to see videos.</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{form.as_p }}
+    <button type="submit">Login</button>
+  </form>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "mtview/base.html" %}
+{% load static %}
+
+{% block content %}
+
+{% if budgets and budgetcategories %}
+  {% for budgetcategory in budgetcategories %}
+    <div class = "jumbotron">
+      <h1> {{ budgetcategory.title }}</h1>
+      {% for budget in budgets %}
+        {% if budget.budgetcategory == budgetcategory %}
+          <div class = "well">
+            <span>
+              <h2> {{ budget.subtitle }} </h2>
+              <img class = "thumbnail" width = "320px" href="#" src = "{% static "" %}images/{{ budget.picture}} "></img>
+            </span>
+            <p> {{ budget.description }}</p>
+
+          </div>
+          <div class="progress">
+            <div class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar" aria-valuenow="{{ budget.amountraised }}" aria-valuemin="0" aria-valuemax="{{ budget.amountneeded}}" style = "width: {{ budget.percentcomplete }}%">
+              ${{ budget.amountraised }} of ${{ budget.amountneeded }}
+            </div>
+          </div>
+          <a href="#" class="btn btn-success" role="button">Sponsor</a>
+        {% endif %}
+      {% endfor %}
+    </div>
+  {% endfor %}
+{% endif %}
+
+
+{% endblock %}

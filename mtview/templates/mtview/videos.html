@@ -1,0 +1,21 @@
+{% extends "mtview/base.html" %}
+{% load static %}
+
+{% block content %}
+</br></br></br>
+{% if user is not None %}
+<div class="dropdown">
+  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Matches for {{ user.username }}:
+  <span class="caret"></span></button>
+  <ul class="dropdown-menu">
+    {% for video in videos %}
+      <li><a href= "/video/{{ video.opponentschool }}{{ video.date|date:"mjY" }}">{{ video.opponentschool }} {{ video.date|date:"m/j/Y" }}</a></li>
+    {% endfor %}
+  </ul>
+</div>
+
+{% else %}
+  </br></br></br>
+  <h1> You must be <a href="/login">logged in</a> and have permission to see videos </h1>
+{% endif %}
+{% endblock %}
